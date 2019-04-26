@@ -8,7 +8,7 @@
     },
     "files": [
         "TDGesture.ts",
-        "_locales/zh/maqueen-strings.json"
+        "_locales/zh/TDGesture-strings.json"
         
     ],
     "testFiles": [
