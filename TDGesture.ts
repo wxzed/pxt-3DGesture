@@ -86,12 +86,15 @@ namespace TDGesture {
     let AirWheelActivePrevious = false   // AirWheel status in the previous run
 
     let AirWheelDiff = 0
+    let Status = 0;
+    let Update = false;
+    let UsePin = chooseD.P0;
     /*3D手势模块*/
     function i2c1_MasterRead(reclength: number, address: number): number {
         /*获取数据到缓冲区*/
         let recbuf = pins.createBuffer(128) //recbuf为全局变量的话只能在function内部使用
         recbuf = pins.i2cReadBuffer(address, reclength, false)//repeated
-        serial.writeBuffer(recbuf)
+        //serial.writeBuffer(recbuf)
         /*处理缓冲区数据*/
         /*Extract data from buffer*/
         let streamOutRequired = (STREAMOUT_DSPINFO | STREAMOUT_GESTUREINFO | STREAMOUT_TOUCHINFO | STREAMOUT_AIRWHEELINFO | STREAMOUT_XYZPOSITION);
@@ -153,27 +156,34 @@ namespace TDGesture {
     /*3D手势模块*/
     //% weight = 40
     //% blockId=Gesture block="pin(D) %pinD|pin(MCLR) %pinMCLR|Current posture %Pose|?"
-    export function Gesture(pinD: chooseD, pinMCLR: number, Pose: whichPose): boolean {
-
-        let cmd: number
-        let Gespin = pins.digitalReadPin(<number>pinD)
-        //let Gespin = pins.digitalReadPin(DigitalPin.P0)
-        if (Gespin == 0) {
-
-            cmd = i2c1_MasterRead(26, 0x42)
-            serial.writeNumber(0)
-            serial.writeNumber(cmd)
-            if (Pose == cmd) {
-                return true
-            }
-            else {
-                return false
-            }
+    export function Gesture(pinD: chooseD, pinMCLR: chooseD, Pose: whichPose): boolean {
+        UsePin = pinD;
+        if (Status == Pose) {
+            Status = 0;
+            return true;
         }
         return false;
     }
 
-
+    basic.forever(function () {
+        let Gespin = pins.digitalReadPin(<number>UsePin)
+        //let Gespin = pins.digitalReadPin(DigitalPin.P0)
+        if (Gespin == 0) {
+            let cmd = i2c1_MasterRead(26, 0x42);
+            switch (cmd) {
+                case whichPose.CCW:
+                case whichPose.CW:
+                case whichPose.Down:
+                case whichPose.Left:
+                case whichPose.Right:
+                case whichPose.Up:
+                    Status = cmd;
+                    break;
+                default:
+                    break;
+            }
+        }
+    })
 }
 
 
