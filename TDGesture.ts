@@ -43,17 +43,17 @@ enum chooseD {
     P20 = DigitalPin.P20
 }
 enum whichPose {
-    //% block="向上"
+    //% block="Up"
     Up = 4,
-    //% block="向下"
+    //% block="Down"
     Down = 5,
-    //% block="向左"
+    //% block="Left"
     Left = 3,
-    //% block="向右"
+    //% block="Right"
     Right = 2,
-    //% block="顺时针"
+    //% block="CW"
     CW = GI_AIRWHEEL_CW,
-    //% block="逆时针"
+    //% block="CCW"
     CCW = GI_AIRWHEEL_CCW
 }
 

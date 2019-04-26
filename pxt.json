@@ -9,10 +9,8 @@
     "files": [
         "TDGesture.ts",
         "_locales/zh/TDGesture-strings.json"
-        
     ],
-    "testFiles": [
-    ],
+    "testFiles": [],
     "public": true,
-    "installedVersion": "workspace:3eb72f5a-2f83-4cbf-aac3-172f1a952894"
+    "installedVersion": "workspace:39eec8c0-1f94-44e4-0c0c-a8c4d41b5884"
 }
