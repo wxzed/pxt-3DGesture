@@ -1,0 +1,18 @@
+{
+    "name": "TDGesture",
+    "version": "0.0.1",
+    "description": "Used to monitor the occurrence of gestures",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "TDGesture.ts",
+        "_locales/zh/maqueen-strings.json"
+        
+    ],
+    "testFiles": [
+    ],
+    "public": true,
+    "installedVersion": "workspace:3eb72f5a-2f83-4cbf-aac3-172f1a952894"
+}
